@@ -1,53 +1,66 @@
-// Classe HashMap
 package entities;
 
 public class HashMap {
 
     int numberElements;
-    Word[] allocation;
+    BinarySearchTree[] allocation;
 
     public HashMap(){
         this.numberElements = 0;
-        this.allocation = new Word[26];
+        this.allocation = new BinarySearchTree[26];
     }
 
-    public int funHash(Word word) {
-        String alfabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        alfabet = alfabet.toLowerCase();
-        int key = -1;
-        for (int i = 0; i < alfabet.length(); i++) {
-            if (word.getWord().charAt(0) == alfabet.charAt(i)) { // Acessa o primeiro caractere da palavra
-                key = i;
-                break;
-            }
-        }
-        return key;
+    public int funHash(String word) {
+        char firstChar = word.toLowerCase().charAt(0);
+        return firstChar - 'a';  // Calcula a posição da letra no alfabeto
     }
 
     public void insert(Word word, int line) {
-        int chave = funHash(word); // Calcula a chave com base na primeira letra
+        int chave = funHash(word.getWord()); // Calcula a chave com base na primeira letra
 
-        if (chave == -1) {
+        if (chave < 0 || chave >= 26) {
             System.err.println("Palavra inválida para hash: " + word.getWord());
             return;
         }
 
-        // Insere o índice na lista encadeada do objeto Word
-        word.getIndex().insertAtEnd(line);
-        this.allocation[chave] = word; // Armazena o objeto Word na posição calculada
+        // Se não houver uma árvore na posição, cria uma nova
+        if (allocation[chave] == null) {
+            allocation[chave] = new BinarySearchTree();
+        }
+
+        // Insere a palavra na árvore binária de busca da posição especificada
+        allocation[chave].insert(word, line);
         numberElements++;
     }
 
     public void print() {
-        System.out.println("Chave\tPalavra +\tLista de Índices");
+        System.out.println("Chave\tPalavra\t\tLista de Índices");
         for (int i = 0; i < allocation.length; i++) {
             if (allocation[i] != null) {
                 System.out.print(i + "\t");
-                allocation[i].print();
-                allocation[i].getIndex().print();
+                allocation[i].print(); // Chama o método print da árvore para exibir palavras e índices
             } else {
                 System.out.println(i + "\t[ null ]");
             }
         }
     }
+    public LinkedList search(String wordToFind) {
+        int chave = funHash(wordToFind); // Calcula a chave com base na primeira letra
+
+        if (chave < 0 || chave >= 26 || allocation[chave] == null) {
+            System.out.println("Palavra não encontrada: " + wordToFind);
+            return null;
+        }
+
+        // Busca a palavra na árvore binária de busca correspondente
+        Word foundWord = allocation[chave].search(new Word(wordToFind));
+
+        if (foundWord != null) {
+            return foundWord.getIndex();  // Retorna a lista de índices
+        } else {
+            System.out.println("Palavra não encontrada: " + wordToFind);
+            return null;
+        }
+    }
+
 }

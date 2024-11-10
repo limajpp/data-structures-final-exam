@@ -1,4 +1,3 @@
-// Classe Word
 package entities;
 
 public class Word {
@@ -10,12 +9,12 @@ public class Word {
         this.index = new LinkedList();
     }
 
-    public String getWord() {
-        return word;
-    }
-
     public void setWord(String word) {
         this.word = word;
+    }
+
+    public String getWord() {
+        return word;
     }
 
     public LinkedList getIndex() {
@@ -25,9 +24,5 @@ public class Word {
     @Override
     public String toString() {
         return "Word: " + word + ", Index List: " + index.toString();
-    }
-
-    public void print(){
-        System.out.print(word + "\t+");
     }
 }

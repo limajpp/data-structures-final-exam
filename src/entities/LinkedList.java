@@ -1,4 +1,3 @@
-// Classe LinkedList
 package entities;
 
 public class LinkedList {
@@ -12,11 +11,11 @@ public class LinkedList {
         }
     }
 
-    private Node tail;
+    private Node head;
     private int elements;
 
     public LinkedList() {
-        tail = null;
+        head = null;
         elements = 0;
     }
 
@@ -28,9 +27,9 @@ public class LinkedList {
         Node newNode = new Node(element);
 
         if (isEmpty()) {
-            tail = newNode;
+            head = newNode;
         } else {
-            Node current = tail;
+            Node current = head;
             while (current.next != null) {
                 current = current.next;
             }
@@ -40,16 +39,18 @@ public class LinkedList {
         elements++;
     }
 
-    public void print() {
-        Node current = tail;
-        System.out.print("[");
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[");
+        Node current = head;
         while (current != null) {
-            System.out.print(current.ELEMENT);
+            result.append(current.ELEMENT);
             if (current.next != null) {
-                System.out.print(", ");
+                result.append(", ");
             }
             current = current.next;
         }
-        System.out.println("]");
+        result.append("]");
+        return result.toString();
     }
 }
