@@ -23,15 +23,25 @@ public class LinkedList {
         return elements == 0;
     }
 
+    public boolean contains(int element) {
+        if (isEmpty()) throw new IllegalStateException("LinkedList is empty.");
+
+        Node current = tail;
+        while (current != null) {
+            if (current.ELEMENT == element) return true;
+            current = current.next;
+        }
+
+        return false;
+    }
+
     public void insertAtStart(int element) {
         Node node = new Node(element);
 
-        if (isEmpty()) {
-            tail = node;
-        } else {
+        if (!isEmpty()) {
             node.next = tail;
-            tail = node;
         }
+        tail = node;
 
         elements++;
     }
@@ -71,6 +81,45 @@ public class LinkedList {
             }
             current.next = null;
         }
+        elements--;
+    }
+
+    public void insertAtIndex(int index, int element) {
+        if (index < 0 || index > elements) {
+            throw new IndexOutOfBoundsException("Invalid index: " + index);
+        }
+        if (index == 0) {
+            insertAtStart(element);
+            return;
+        }
+
+        Node newNode = new Node(element);
+        Node currentNode = tail;
+
+        for (int currentIndex = 0; currentIndex < index - 1; currentIndex++) {
+            currentNode = currentNode.next;
+        }
+
+        newNode.next = currentNode.next;
+        currentNode.next = newNode;
+        elements++;
+    }
+
+    public void removeAtIndex(int index) {
+        if (index < 0 || index >= elements) {
+            throw new IndexOutOfBoundsException("Invalid index: " + index);
+        }
+        if (index == 0) {
+            removeAtStart();
+            return;
+        }
+
+        Node currentNode = tail;
+        for (int currentIndex = 0; currentIndex < index - 1; currentIndex++) {
+            currentNode = currentNode.next;
+        }
+
+        currentNode.next = currentNode.next.next;
         elements--;
     }
 

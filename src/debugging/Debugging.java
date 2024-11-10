@@ -31,6 +31,20 @@ public class Debugging {
             linkedList.removeAtEnd();
 
             System.out.println(linkedList);
+
+            System.out.println(linkedList.contains(1) + "\n");
+
+            linkedList.insertAtIndex(1, 4);
+
+            System.out.println(linkedList);
+
+            linkedList.removeAtIndex(1);
+
+            System.out.println(linkedList);
+
+            linkedList.removeAtIndex(0);
+
+            System.out.println(linkedList);
         } catch (Exception exception) {
             exception.printStackTrace();
         } finally {
