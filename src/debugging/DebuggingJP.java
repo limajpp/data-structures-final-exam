@@ -2,7 +2,7 @@ package debugging;
 
 import entities.LinkedList;
 
-public class Debugging {
+public class DebuggingJP {
     public static void main(String[] args) {
         try {
             LinkedList linkedList = new LinkedList();
