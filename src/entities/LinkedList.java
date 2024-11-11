@@ -123,20 +123,18 @@ public class LinkedList {
         elements--;
     }
 
-    // Created for debugging...
     @Override
     public String toString() {
-        if (isEmpty()) return "Tail - null\nelements: " + elements + "\n";
-
-        StringBuilder linkedListString = new StringBuilder("Tail - ");
+        StringBuilder result = new StringBuilder("[");
         Node current = tail;
-
         while (current != null) {
-            linkedListString.append(current.ELEMENT).append(" -> ");
+            result.append(current.ELEMENT);
+            if (current.next != null) {
+                result.append(", ");
+            }
             current = current.next;
         }
-
-        linkedListString.append("Head\n").append("elements: ").append(elements).append("\n");
-        return linkedListString.toString();
+        result.append("]");
+        return result.toString();
     }
 }
