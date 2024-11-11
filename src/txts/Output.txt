@@ -1,0 +1,4 @@
+anastacio:[9]
+arvore:[10]
+gabriel:[1, 5]
+freitas:[4, 8]
