@@ -21,9 +21,10 @@ public class DebuggingBL {
         HashMap hashMap = new HashMap();
         Scanner scanner = new Scanner(System.in);
         //Scanner para receber as palavras de busca
-        String searchWords = scanner.next();
+        String searchWords = scanner.nextLine();
         searchWords = searchWords.toLowerCase();
-        String[]splitedWords = searchWords.split(",");
+        System.out.println(searchWords);
+        String[]splitedWords = searchWords.split(", ");
 
 
         try {
@@ -37,8 +38,10 @@ public class DebuggingBL {
 
         for (int i = 0; i < content.length(); i++) {
             char currentChar = content.charAt(i);
+            String currentString = content.substring(i,i+1);
 
-            if (currentChar == ' ' || currentChar == '\n') {
+
+            if (currentChar == ' ' || currentChar == '\n' || currentString.equals(",")) {
                 if (word != null && !word.getWord().isEmpty()) {
                     hashMap.insert(word, line);
                     word = null;
@@ -61,16 +64,24 @@ public class DebuggingBL {
 
         hashMap.print();
 
-        //Bubble Sort to sort split words
-        for (int i = 0; i < splitedWords.length-1; i++) {
-            for (int j = 0;j < splitedWords.length-1-i; j++){
-                if (splitedWords[j].compareTo(splitedWords[j+1])>1){
+        //Bubble Sort to sort split words,Modificado para ser completo e menos eficiente
+        boolean troca;
+
+        do {
+            troca = false; // Inicializa a flag como false no início de cada passada
+
+            for (int j = 0; j < splitedWords.length - 1; j++) {
+                if (splitedWords[j].compareTo(splitedWords[j + 1]) > 0) {
+                    // Troca os elementos
                     String temp = splitedWords[j];
-                    splitedWords[j] = splitedWords[j+1];
-                    splitedWords[j+1] = temp;
+                    splitedWords[j] = splitedWords[j + 1];
+                    splitedWords[j + 1] = temp;
+
+                    troca = true; // Marca que houve troca
                 }
             }
-        }
+
+        } while (troca); // Continua enquanto houver trocas
 
 
         for (int i = 0; i < splitedWords.length; i++) {
