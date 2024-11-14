@@ -9,23 +9,29 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.io.IOException;
 import java.nio.file.StandardOpenOption;
-import java.util.Scanner;
 
 public class DebuggingBL {
     public static void main(String[] args) {
+        String inputWords ="/home/bl/IdeaProjects/data-structures-final-exam/src/txts/InputWords.txt";
         String filePath = "/home/bl/IdeaProjects/data-structures-final-exam/src/txts/Input.txt";
         String outputFilePath = "/home/bl/IdeaProjects/data-structures-final-exam/src/txts/Output.txt";
         String content = "";
         String contentOutput = "";
         int line = 1;
         HashMap hashMap = new HashMap();
-        Scanner scanner = new Scanner(System.in);
         //Scanner para receber as palavras de busca
-        String searchWords = scanner.nextLine();
-        searchWords = searchWords.toLowerCase();
-        System.out.println(searchWords);
-        String[]splitedWords = searchWords.split(", ");
+        String searchWords = "";
 
+        String[]splitedWords = new String[0];
+
+        try{
+            searchWords = Files.readString(Path.of(inputWords),StandardCharsets.UTF_8);
+            searchWords = searchWords.toLowerCase();
+            System.out.println(searchWords);
+            splitedWords = searchWords.split(", ");
+        } catch (IOException e) {
+            System.err.println("Failed in read file: "+e.getMessage());
+        }
 
         try {
             content = Files.readString(Path.of(filePath), StandardCharsets.UTF_8);
@@ -41,7 +47,7 @@ public class DebuggingBL {
             String currentString = content.substring(i,i+1);
 
 
-            if (currentChar == ' ' || currentChar == '\n' || currentString.equals(",")) {
+            if (currentChar == ' ' || currentChar == '\n' || currentString.equals(",") || currentString.equals(".")) {
                 if (word != null && !word.getWord().isEmpty()) {
                     hashMap.insert(word, line);
                     word = null;
