@@ -1,10 +1,7 @@
-Gabriel
-Oliveira
-De
-Freitas
-Gabriel
-Oliveira
-De
-Freitas
-Anastacio
-Arvore
+Good programming is not learned from 1
+generalities, but by seeing how significant 2
+programs can be made clean, easy to 3
+read, easy to maintain and modify, 4
+human-engineered, efficient, and reliable, 5
+by the application of common sense and 6
+by the use of good programming practices. 7

@@ -53,7 +53,7 @@ public class HashMap {
         }
 
         // Busca a palavra na árvore binária de busca correspondente
-        Word foundWord = allocation[chave].search(new Word(wordToFind));
+        Word foundWord = allocation[chave].search(new Word(wordToFind));//Como recebe uma String,instancia uma Word e procura na Tree.
 
         if (foundWord != null) {
             return foundWord.getIndex();  // Retorna a lista de índices
