@@ -68,7 +68,7 @@ public class DebuggingBL {
             hashMap.insert(word, line);
         }
 
-        hashMap.print();
+        //hashMap.print();
 
         //Bubble Sort to sort split words,Modificado para ser completo e menos eficiente
         boolean troca;

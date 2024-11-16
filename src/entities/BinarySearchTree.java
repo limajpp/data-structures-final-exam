@@ -1,5 +1,8 @@
 package entities;
 
+// Método iguais ao TAD do professor Túlio,modificado apenas a forma de comparação para compareTo.
+
+
 public class BinarySearchTree {
     class Node {
         public Word element;
@@ -21,28 +24,45 @@ public class BinarySearchTree {
         this.nElements = 0;
     }
 
-    public void insert(Word element, int line){
-        this.root = insert(element, this.root, line);
+    public void insert(Word element, int line) {
+        insert(element, this.root, line); // Chama o método privado
     }
 
-    private Node insert(Word element, Node node, int line) {
+    private void insert(Word element, Node node, int line) {
         if (node == null) {
-            element.getIndex().insertAtEnd(line);  // Adiciona a linha na lista de índices da nova palavra
+            // Se o nó é null, criamos um novo nó como raiz
+            Node newNode = new Node(element);
+            element.getIndex().insertAtEnd(line); // Adiciona a linha na lista de índices
             nElements++;
-            return new Node(element);
+
+            if (this.root == null) {
+                this.root = newNode; // Caso especial: a árvore estava vazia
+            }
+            return;
         }
 
         int comparison = element.getWord().compareTo(node.element.getWord());
 
         if (comparison < 0) {
-            node.left = insert(element, node.left, line);
+            if (node.left == null) {
+                node.left = new Node(element); // Cria o novo nó no lado esquerdo
+                element.getIndex().insertAtEnd(line); // Adiciona a linha na lista de índices
+                nElements++;
+            } else {
+                insert(element, node.left, line); // Continua recursão pela esquerda
+            }
         } else if (comparison > 0) {
-            node.right = insert(element, node.right, line);
+            if (node.right == null) {
+                node.right = new Node(element); // Cria o novo nó no lado direito
+                element.getIndex().insertAtEnd(line); // Adiciona a linha na lista de índices
+                nElements++;
+            } else {
+                insert(element, node.right, line); // Continua recursão pela direita
+            }
         } else {
-            node.element.getIndex().insertAtEnd(line);  // Palavra já existe, adiciona linha à lista de ocorrências
+            // Palavra já existe, adiciona linha à lista de ocorrências
+            node.element.getIndex().insertAtEnd(line);
         }
-
-        return node;
     }
 
     public void print() {
