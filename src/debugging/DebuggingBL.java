@@ -1,17 +1,18 @@
-package application;
+package debugging;
 
 import entities.HashMap;
 import entities.LinkedList;
 import entities.Word;
 import exceptions.FileReadFailException;
+import application.MainUtils;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.io.IOException;
 import java.nio.file.StandardOpenOption;
 
-public class Main {
+public class DebuggingBL {
     public static void main(String[] args) {
         // Strings que armazenam o conteúdo do arquivo de entrada (Input.txt) e saída (Output.txt)
         String contentInput;
