@@ -2,11 +2,11 @@ package entities;
 
 public class Word {
     private String word;
-    private LinkedList index;
+    private final LinkedList OCCURRENCES;
 
     public Word(String word){
         this.word = word;
-        this.index = new LinkedList();
+        this.OCCURRENCES = new LinkedList();
     }
 
     public void setWord(String word) {
@@ -17,12 +17,10 @@ public class Word {
         return word;
     }
 
-    public LinkedList getIndex() {
-        return index;
-    }
+    public LinkedList getOCCURRENCES() { return OCCURRENCES; }
 
     @Override
     public String toString() {
-        return "Word: " + word + ", Index List: " + index.toString();
+        return "Word: " + word + ", Index List: " + OCCURRENCES;
     }
 }

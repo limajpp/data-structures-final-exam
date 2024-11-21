@@ -38,7 +38,7 @@ public class HashMap {
         for (int i = 0; i < allocation.length; i++) {
             if (allocation[i] != null) {
                 System.out.print(i + "\t");
-                allocation[i].print(); // Chama o método print da árvore para exibir palavras e índices
+                allocation[i].print(); // Print da árvore para exibir palavras e índices
             } else {
                 System.out.println(i + "\t[ null ]");
             }
@@ -53,14 +53,13 @@ public class HashMap {
         }
 
         // Busca a palavra na árvore binária de busca correspondente
-        Word foundWord = allocation[chave].search(new Word(wordToFind));//Como recebe uma String,instancia uma Word e procura na Tree.
+        Word foundWord = allocation[chave].search(new Word(wordToFind));//Como recebe uma String, instancia uma Word e procura na Tree.
 
         if (foundWord != null) {
-            return foundWord.getIndex();  // Retorna a lista de índices
+            return foundWord.getOCCURRENCES();  // Retorna a lista de índices
         } else {
             System.out.println("Palavra não encontrada: " + wordToFind);
             return null;
         }
     }
-
 }
